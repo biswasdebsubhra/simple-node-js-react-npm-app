@@ -17,6 +17,7 @@ pipeline {
                         sh 'id'
                         sh 'ls -lrt'
                         sh 'npm install'
+		}
             }
         }
         stage('Test') {
