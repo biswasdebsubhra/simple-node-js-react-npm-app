@@ -8,7 +8,7 @@ pipeline {
     environment {
         CI = 'true'
         HOME = '.'
-	EMAIL_TO = 'ahussain@smartshifttech.com'
+	EMAIL_TO = 'dbiswas@smartshifttech.com'
     }
     stages {
         stage('Build') {
