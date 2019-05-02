@@ -11,7 +11,12 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'npm install --unsafe-perm=true --allow-root'
+                def image = docker.image('node:6-alpine')
+                    image.pull()
+                    image.inside() {
+                        sh 'id'
+                        sh 'ls -lrt'
+                        sh 'npm install'
             }
         }
         stage('Test') {
