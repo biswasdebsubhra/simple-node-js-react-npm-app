@@ -6,6 +6,9 @@ pipeline {
         }
     }
     environment {
+        HOME = '.'
+    }
+    environment {
         CI = 'true'
     }
     stages {
