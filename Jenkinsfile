@@ -16,18 +16,33 @@ pipeline {
                 sh 'ls -lrt'
 		sh 'npm i sw-precache'
                 sh 'npm install'
-	emailext (
-            subject: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-            body: """<p>STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
-              <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
-            recipientProviders: [[$class: 'DevelopersRecipientProvider']]
-          )
+            }
+        }
+	stage ('success'){
+            steps {
+                script {
+                    currentBuild.result = 'SUCCESS'
+                }
             }
         }
         stage('Test') {
             steps {
                 sh './jenkins/scripts/test.sh'
             }
+        }
+    }
+	post {
+        failure {
+            script {
+                currentBuild.result = 'FAILURE'
+            }
+        }
+
+        always {
+            step([$class: 'Mailer',
+                notifyEveryUnstableBuild: true,
+                recipients: "biswasdebsubhra@gmail.com",
+                sendToIndividuals: true])
         }
     }
 }
