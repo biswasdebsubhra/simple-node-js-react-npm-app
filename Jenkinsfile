@@ -14,6 +14,7 @@ pipeline {
             steps {
                 sh 'id'
                 sh 'ls -lrt'
+		sh 'npm i sw-precache'
                 sh 'npm install'
             }
         }
