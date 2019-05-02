@@ -8,9 +8,9 @@ pipeline {
         HOME = '.'
     }
   }
-    environment {
+/*    environment {
         CI = 'true'
-    }
+    } */
     stages {
         stage('Build') {
             steps {
